@@ -7,8 +7,8 @@ const Product = require('../models/Product');
 router.get('/', (req, res, next) => {
     Product.find()
         .exec()
-        .then(document => {
-            res.status(200).json(document)
+        .then(documents => {
+            res.status(200).json(documents)
         })
         .catch(error => {
             console.log(error);
