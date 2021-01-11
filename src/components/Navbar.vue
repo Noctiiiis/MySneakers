@@ -5,9 +5,9 @@
     </mdb-navbar-brand>
     <mdb-navbar-toggler>
       <mdb-navbar-nav right>
-        <mdb-nav-item href="/products">Produits</mdb-nav-item>
-        <mdb-nav-item href="/products/men">Homme</mdb-nav-item>
-        <mdb-nav-item href="/products/women">Femme</mdb-nav-item>
+        <mdb-nav-item href="/products">Products</mdb-nav-item>
+        <mdb-nav-item href="/products/men">Man</mdb-nav-item>
+        <mdb-nav-item href="/products/women">Women</mdb-nav-item>
       </mdb-navbar-nav>
     </mdb-navbar-toggler>
   </mdb-navbar>
