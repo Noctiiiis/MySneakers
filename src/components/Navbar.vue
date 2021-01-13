@@ -14,24 +14,30 @@
 </template>
 
 <script>
-import {mdbNavbar, mdbNavbarBrand, mdbNavbarToggler, mdbNavbarNav, mdbNavItem} from 'mdbvue'
+import {
+  mdbNavbar,
+  mdbNavbarBrand,
+  mdbNavbarToggler,
+  mdbNavbarNav,
+  mdbNavItem,
+} from "mdbvue";
 
 export default {
-  name: 'Navbar',
+  name: "Navbar",
   components: {
     mdbNavbar,
     mdbNavbarBrand,
     mdbNavbarToggler,
     mdbNavbarNav,
-    mdbNavItem
-  }
-}
+    mdbNavItem,
+  },
+};
 </script>
 
 <style>
-  #brand {
-    color: black;
-    font-weight: bold;
-    font-style: italic;
-  }
+#brand {
+  color: black;
+  font-weight: bold;
+  font-style: italic;
+}
 </style>
