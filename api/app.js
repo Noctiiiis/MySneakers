@@ -8,7 +8,7 @@ const productsRoute = require('./routes/products');
 // Database connection
 mongoose.connect('mongodb://127.0.0.1:27017/mysneakers', {useNewUrlParser: true, useUnifiedTopology: true});
 
-// Cors access
+// Allows CORS access
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use((req, res, next) => {
