@@ -12,19 +12,20 @@ router.get('/', (req, res, next) => {
         })
         .catch(error => {
             console.log(error);
-            res.status(500).json({error: error})
+            res.status(500).json({ error: error })
         });
 });
 
+// Gets all the men products
 router.get('/men', (req, res, next) => {
-    Product.find({type: 'Man'})
+    Product.find({ type: 'Man' })
         .exec()
         .then(document => {
             res.status(200).json(document)
         })
         .catch(error => {
             console.log(error);
-            res.status(500).json({error: error})
+            res.status(500).json({ error: error })
         });
 });
 
@@ -39,7 +40,7 @@ router.get('/:productId', (req, res, next) => {
         })
         .catch(error => {
             console.log(error);
-            res.status(500).json({error: error})
+            res.status(500).json({ error: error })
         });
 });
 
