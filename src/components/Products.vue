@@ -23,20 +23,55 @@ export default {
     mdbRow,
     ProductCard,
   },
+  props: {
+    filter: {
+      type: String,
+    },
+  },
   mounted() {
     ProductCard;
-    this.$http.get("http://localhost:3000/products").then((response) => {
-      response.json().then((data) => {
-        this.products = data;
-        this.quantity = data.length;
-      });
-    });
+    this.dataFilter();
   },
   data() {
     return {
       products: [],
       quantity: 0,
     };
+  },
+  methods: {
+    dataFilter: function () {
+      if (this.filter) {
+        switch (this.filter) {
+          case "men":
+            this.$http
+              .get("http://localhost:3000/products/men")
+              .then((response) => {
+                response.json().then((data) => {
+                  this.products = data;
+                  this.quantity = data.length;
+                });
+              });
+            break;
+          case "women":
+            this.$http
+              .get("http://localhost:3000/products/women")
+              .then((response) => {
+                response.json().then((data) => {
+                  this.products = data;
+                  this.quantity = data.length;
+                });
+              });
+            break;
+        }
+      } else {
+        this.$http.get("http://localhost:3000/products").then((response) => {
+          response.json().then((data) => {
+            this.products = data;
+            this.quantity = data.length;
+          });
+        });
+      }
+    },
   },
 };
 </script>
