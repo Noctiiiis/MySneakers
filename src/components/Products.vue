@@ -1,6 +1,6 @@
 <template>
   <mdb-container fluid class="px-5">
-    <header class="pt-3">
+    <header>
       <h3>Products ({{ this.quantity }})</h3>
     </header>
     <mdb-row center>
