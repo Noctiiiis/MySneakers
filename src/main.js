@@ -19,6 +19,8 @@ const router = new VueRouter({
   routes: [
     { path: '/', component: Home },
     { path: '/products', component: Products },
+    { path: '/products/men', component: Products, props: { filter: 'men' } },
+    { path: '/products/women', component: Products, props: { filter: 'women' } }
   ]
 })
 
