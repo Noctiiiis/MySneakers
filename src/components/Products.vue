@@ -4,7 +4,7 @@
       <h3>Products ({{ this.quantity }})</h3>
     </header>
     <mdb-row center>
-      <div v-for="product in products" :key="product.id" class="m-2">
+      <div v-for="product in products" :key="product._id" class="m-2">
         <product-card :product="product"></product-card>
       </div>
     </mdb-row>
