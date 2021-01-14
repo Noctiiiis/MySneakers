@@ -5,9 +5,10 @@
     </mdb-navbar-brand>
     <mdb-navbar-toggler>
       <mdb-navbar-nav right>
-        <mdb-nav-item href="/products">Products</mdb-nav-item>
-        <mdb-nav-item href="/products/men">Men</mdb-nav-item>
-        <mdb-nav-item href="/products/women">Women</mdb-nav-item>
+        <mdb-nav-item href="/products" class="mx-2">Products</mdb-nav-item>
+        <mdb-nav-item href="/products/men" class="mx-2">Men</mdb-nav-item>
+        <mdb-nav-item href="/products/women" class="mx-2">Women</mdb-nav-item>
+        <mdb-nav-item href="/login" class="ml-5"><mdb-icon icon="user" /></mdb-nav-item>
       </mdb-navbar-nav>
     </mdb-navbar-toggler>
   </mdb-navbar>
@@ -20,6 +21,7 @@ import {
   mdbNavbarToggler,
   mdbNavbarNav,
   mdbNavItem,
+  mdbIcon,
 } from "mdbvue";
 
 export default {
@@ -30,6 +32,7 @@ export default {
     mdbNavbarToggler,
     mdbNavbarNav,
     mdbNavItem,
+    mdbIcon,
   },
 };
 </script>
