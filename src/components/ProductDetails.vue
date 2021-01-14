@@ -95,13 +95,17 @@ export default {
   },
   methods: {
     getProduct: function () {
-      this.$http
-        .get("http://localhost:3000/products/".concat(this.id))
-        .then((response) => {
+      this.$http.get("http://localhost:3000/products/".concat(this.id)).then(
+        (response) => {
           response.json().then((data) => {
             this.product = data;
           });
-        });
+        },
+        (response) => {
+          console.log(response);
+          window.location.href = "/error";
+        }
+      );
     },
   },
 };
