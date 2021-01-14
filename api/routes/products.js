@@ -29,6 +29,19 @@ router.get('/men', (req, res, next) => {
         });
 });
 
+// Gets all the women products
+router.get('/women', (req, res, next) => {
+    Product.find({ type: 'Woman' })
+        .exec()
+        .then(document => {
+            res.status(200).json(document)
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({ error: error })
+        });
+});
+
 // Gets the product corresponding to the id given in the url
 router.get('/:productId', (req, res, next) => {
     const id = req.params.productId;
