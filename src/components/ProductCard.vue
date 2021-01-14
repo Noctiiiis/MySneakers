@@ -1,7 +1,7 @@
 <template>
   <mdb-card>
     <mdb-view hover class="d-flex align-items-center">
-      <router-link to="`/products/${ product.id }`">
+      <router-link :to="`/products/${product._id}`">
         <mdb-card-image :src="require(`../assets/${product.image}`)" />
         <mdb-mask flex-center waves overlay="grey-slight"></mdb-mask>
       </router-link>
