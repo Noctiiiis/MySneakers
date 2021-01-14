@@ -6,9 +6,10 @@ import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 
 // Components
-import App from './App.vue'
-import Home from './components/Home.vue'
-import Products from './components/Products.vue'
+import App from './App'
+import Home from './components/Home'
+import Products from './components/Products'
+import ProductDetails from './components/ProductDetails'
 
 Vue.config.productionTip = false
 Vue.use(VueRouter)
@@ -20,7 +21,8 @@ const router = new VueRouter({
     { path: '/', component: Home },
     { path: '/products', component: Products },
     { path: '/products/men', component: Products, props: { filter: 'men' } },
-    { path: '/products/women', component: Products, props: { filter: 'women' } }
+    { path: '/products/women', component: Products, props: { filter: 'women' } },
+    { path: '/products/:id', component: ProductDetails, props: true },
   ]
 })
 
