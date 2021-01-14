@@ -1,5 +1,5 @@
 <template>
-  <mdb-navbar light color="white" class="mb-3">
+  <mdb-navbar light color="white" class="mb-5">
     <mdb-navbar-brand>
       <a href="/"><h1 id="brand">MySneakers</h1></a>
     </mdb-navbar-brand>
