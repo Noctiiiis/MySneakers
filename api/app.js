@@ -3,7 +3,8 @@ const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
-const productsRoute = require('./routes/products');
+const productRoutes = require('./routes/products');
+const userRoutes = require('./routes/user');
 
 // Database connection
 mongoose.connect('mongodb://127.0.0.1:27017/mysneakers', { useNewUrlParser: true, useUnifiedTopology: true });
@@ -25,7 +26,8 @@ app.use((req, res, next) => {
 })
 
 // Routes
-app.use('/products', productsRoute);
+app.use('/products', productRoutes);
+app.use('/user', userRoutes);
 
 // Errors
 app.use((req, res, next) => {
