@@ -40,7 +40,45 @@ router.post('/register', (req, res, next) => {
                 })
             }
         })
-        .catch();
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            })
+        });
 });
+
+router.post('/login', (req, res, next) => {
+    User.findOne({ email: req.body.email })
+        .exec()
+        .then(user => {
+            if(user.length < 1) {
+                return res.status(401).json({
+                    message: 'Authentification failed'
+                });
+            }
+            bcrypt.compare(req.body.password, user.password, (error, result) => {
+                if(error) {
+                    return res.status(401).json({
+                        message: 'Authentification failed'
+                    });
+                } 
+                if(result) {
+                    return res.status(200).json({
+                        message: 'Authentification successful'
+                    });
+                }
+                return res.status(401).json({
+                    message: 'Authentification failed'
+                });
+            })
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            })
+        });
+})
 
 module.exports = router;
