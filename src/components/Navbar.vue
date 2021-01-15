@@ -8,7 +8,7 @@
         <mdb-nav-item href="/products" class="mx-2">Products</mdb-nav-item>
         <mdb-nav-item href="/products/men" class="mx-2">Men</mdb-nav-item>
         <mdb-nav-item href="/products/women" class="mx-2">Women</mdb-nav-item>
-        <mdb-nav-item href="/login" class="ml-5"><mdb-icon icon="user" /></mdb-nav-item>
+        <mdb-nav-item href="/login" class="ml-lg-5 ml-sm-0"><mdb-icon icon="user" /></mdb-nav-item>
       </mdb-navbar-nav>
     </mdb-navbar-toggler>
   </mdb-navbar>
