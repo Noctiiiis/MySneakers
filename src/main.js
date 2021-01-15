@@ -11,6 +11,7 @@ import Home from './components/Home'
 import Products from './components/Products'
 import ProductDetails from './components/ProductDetails'
 import Login from './components/Login'
+import Register from './components/Register'
 import NotFound from './components/NotFound'
 
 Vue.config.productionTip = false
@@ -26,6 +27,7 @@ const router = new VueRouter({
     { path: '/products/women', component: Products, props: { filter: 'women' } },
     { path: '/products/:id', component: ProductDetails, props: true },
     { path: '/login', component: Login },
+    { path: '/register', component: Register },
     { path: '/error', component: NotFound },
     { path: '*', component: NotFound }
   ]
