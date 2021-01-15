@@ -52,18 +52,18 @@ router.post('/login', (req, res, next) => {
     User.findOne({ email: req.body.email })
         .exec()
         .then(user => {
-            if(user.length < 1) {
+            if (user.length < 1) {
                 return res.status(401).json({
                     message: 'Authentification failed'
                 });
             }
             bcrypt.compare(req.body.password, user.password, (error, result) => {
-                if(error) {
+                if (error) {
                     return res.status(401).json({
                         message: 'Authentification failed'
                     });
-                } 
-                if(result) {
+                }
+                if (result) {
                     return res.status(200).json({
                         message: 'Authentification successful'
                     });
