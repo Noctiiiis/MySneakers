@@ -5,7 +5,10 @@
         <h3 class="mb-5">Login</h3>
         <mdb-input type="email" label="E-mail" />
         <mdb-input type="password" label="Password" />
-        <mdb-btn color="grey darken-1">Login</mdb-btn>
+        <div class="d-flex justify-content-between">
+          <span>Don't have an account? <a href="/register">Click here</a></span>
+          <mdb-btn color="grey darken-1">Login</mdb-btn>
+        </div>
       </mdb-col>
     </mdb-row>
   </mdb-container>
