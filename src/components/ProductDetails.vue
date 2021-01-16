@@ -15,33 +15,49 @@
         <div class="d-flex">
           <p class="grey-text">{{ product.brand }} for {{ product.type }}</p>
         </div>
+        <mdb-alert color="danger" v-if="showError">
+            You must choose a shoe size and a quantity
+          </mdb-alert>
         <div class="w-100 p-4 z-depth-1 d-inline-block">
           <div class="w-100 text-left">
-            <p class="grey-text">Shoe sizes</p>
+            <span class="grey-text">Shoe sizes</span>
           </div>
           <div
             v-for="shoeSize in shoeSizes"
             :key="shoeSize"
             class="d-inline-flex"
           >
-            <shoe-size :shoeSize="shoeSize"></shoe-size>
+            <shoe-size
+              :shoeSize="shoeSize"
+              @click.native="selectShoeSize(shoeSize)"
+            ></shoe-size>
+          </div>
+          <div class="w-100 text-left">
+            <span v-if="selectedSize != ''"
+              >Selected size : {{ this.selectedSize }}</span
+            >
           </div>
         </div>
         <div class="py-3">
-          <p class="grey-text text-left">Quantity</p>
-          <select class="browser-default custom-select">
-            <option selected value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
+          <select
+            class="browser-default custom-select"
+            v-model="selectedQuantity"
+          >
+            <option value="" disabled>Quantity</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
           </select>
         </div>
         <div class="d-flex justify-content-end mb-5">
-          <mdb-btn color="grey darken-1">Add to cart</mdb-btn>
+          <mdb-btn color="grey darken-1" @click="addToCart()"
+            >Add to cart</mdb-btn
+          >
         </div>
       </mdb-col>
     </mdb-row>
@@ -49,7 +65,7 @@
 </template>
 
 <script>
-import { mdbContainer, mdbRow, mdbCol, mdbBtn } from "mdbvue";
+import { mdbContainer, mdbRow, mdbCol, mdbBtn, mdbAlert } from "mdbvue";
 
 import ShoeSize from "./ShoeSize";
 
@@ -60,6 +76,7 @@ export default {
     mdbRow,
     mdbCol,
     mdbBtn,
+    mdbAlert,
     ShoeSize,
   },
   props: {
@@ -91,6 +108,9 @@ export default {
         "44",
         "44.5",
       ],
+      selectedQuantity: "",
+      selectedSize: "",
+      showError: false,
     };
   },
   methods: {
@@ -106,6 +126,25 @@ export default {
           window.location.href = "/error";
         }
       );
+    },
+    selectShoeSize: function (shoeSize) {
+      this.selectedSize = shoeSize;
+    },
+    addToCart: function () {
+      if (this.selectedSize != "" && this.selectedQuantity != '') {
+        this.$http
+          .post("http://localhost:3000/orders", {
+            productId: this.product._id,
+            shoeSize: this.selectedSize,
+            quantity: this.selectedQuantity,
+          })
+          .then((response) => {
+            console.log(response);
+            window.location.href = "/cart";
+          });
+      } else {
+        this.showError = true;
+      }
     },
   },
 };
