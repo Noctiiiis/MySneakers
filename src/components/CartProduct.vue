@@ -18,11 +18,7 @@
       <div class="d-flex mt-2">
         <div class="w-100 mr-2">
           <span class="grey-text">Shoe sizes</span>
-          <select
-            name="shoeSize"
-            id="shoeSize"
-            class="browser-default custom-select"
-          >
+          <select class="browser-default custom-select" v-model="selectedSize">
             <option v-for="shoeSize in shoeSizes" :key="shoeSize">
               {{ shoeSize }}
             </option>
@@ -30,19 +26,24 @@
         </div>
         <div class="w-100">
           <span class="grey-text">Quantity</span>
-          <select class="browser-default custom-select">
-            <option selected value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
+          <select
+            class="browser-default custom-select"
+            v-model="selectedQuantity"
+          >
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
           </select>
         </div>
       </div>
-      <div class="d-flex justify-content-end mt-2"><a>Delete</a></div>
+      <div class="d-flex justify-content-end mt-2">
+        <a @click="deleteOrder(order._id)">Delete</a>
+      </div>
     </div>
   </div>
 </template>
@@ -52,6 +53,9 @@ export default {
   name: "CartProduct",
   props: {
     order: {},
+  },
+  mounted() {
+    this.fillSelects();
   },
   data() {
     return {
@@ -73,7 +77,23 @@ export default {
         "44",
         "44.5",
       ],
+      selectedSize: "",
+      selectedQuantity: "",
     };
+  },
+  methods: {
+    fillSelects: function () {
+      this.selectedSize = this.order.shoeSize;
+      this.selectedQuantity = this.order.quantity;
+    },
+    deleteOrder: function (orderId) {
+      this.$http
+        .delete("http://localhost:3000/orders/".concat(orderId))
+        .then((response) => {
+          console.log(response);
+            location.reload();
+        });
+    },
   },
 };
 </script>
