@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 
 const productRoutes = require('./routes/products');
 const userRoutes = require('./routes/user');
+const orderRoutes = require('./routes/orders')
 
 // Database connection
 mongoose.connect('mongodb://127.0.0.1:27017/mysneakers', { useNewUrlParser: true, useUnifiedTopology: true });
@@ -28,6 +29,7 @@ app.use((req, res, next) => {
 // Routes
 app.use('/products', productRoutes);
 app.use('/user', userRoutes);
+app.use('/orders', orderRoutes);
 
 // Errors
 app.use((req, res, next) => {
