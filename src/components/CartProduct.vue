@@ -19,7 +19,11 @@
         <div class="w-100 mr-2">
           <span class="grey-text">Shoe sizes</span>
           <select class="browser-default custom-select" v-model="selectedSize">
-            <option v-for="shoeSize in shoeSizes" :key="shoeSize">
+            <option
+              v-for="shoeSize in shoeSizes"
+              :key="shoeSize"
+              @change="updateOrder()"
+            >
               {{ shoeSize }}
             </option>
           </select>
@@ -29,6 +33,7 @@
           <select
             class="browser-default custom-select"
             v-model="selectedQuantity"
+            @change="updateOrder()"
           >
             <option>1</option>
             <option>2</option>
@@ -91,8 +96,12 @@ export default {
         .delete("http://localhost:3000/orders/".concat(orderId))
         .then((response) => {
           console.log(response);
-            location.reload();
+          location.reload();
         });
+    },
+    updateOrder: function () {
+      this.order.shoeSize = this.selectedSize;
+      this.order.quantity = this.selectedQuantity;
     },
   },
 };

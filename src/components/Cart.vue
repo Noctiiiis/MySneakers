@@ -14,7 +14,9 @@
           <h5 class="font-weight-bold">CHF {{ this.total }}.-</h5>
         </div>
         <div>
-          <mdb-btn color="grey darken-1" class="w-100">Save cart</mdb-btn>
+          <mdb-btn color="grey darken-1" class="w-100" @click="updateCart()"
+            >Save cart</mdb-btn
+          >
         </div>
       </mdb-col>
     </mdb-row>
@@ -64,6 +66,18 @@ export default {
         total += parseFloat(order.product.price);
       });
       this.total = total.toFixed(2);
+    },
+    updateCart: function () {
+      this.orders.forEach((order) => {
+        this.$http
+          .patch("http://localhost:3000/orders/".concat(order._id), {
+            shoeSize: order.shoeSize,
+            quantity: order.quantity,
+          })
+          .then((response) => {
+            console.log(response);
+          });
+      });
     },
   },
 };
