@@ -29,7 +29,6 @@ export default {
     },
   },
   mounted() {
-    ProductCard;
     this.dataFilter();
   },
   data() {
