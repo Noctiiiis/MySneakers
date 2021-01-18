@@ -18,12 +18,12 @@
       <div class="d-flex mt-2">
         <div class="w-100 mr-2">
           <span class="grey-text">Shoe sizes</span>
-          <select class="browser-default custom-select" v-model="selectedSize">
-            <option
-              v-for="shoeSize in shoeSizes"
-              :key="shoeSize"
-              @change="updateOrder()"
-            >
+          <select
+            class="browser-default custom-select"
+            v-model="selectedSize"
+            @change="selectChanged()"
+          >
+            <option v-for="shoeSize in shoeSizes" :key="shoeSize">
               {{ shoeSize }}
             </option>
           </select>
@@ -33,7 +33,7 @@
           <select
             class="browser-default custom-select"
             v-model="selectedQuantity"
-            @change="updateOrder()"
+            @change="selectChanged()"
           >
             <option>1</option>
             <option>2</option>
@@ -47,7 +47,8 @@
         </div>
       </div>
       <div class="d-flex justify-content-end mt-2">
-        <a @click="deleteOrder(order._id)">Delete</a>
+        <a class="green-text" @click="updateOrder(order._id)" v-if="this.updated">Save</a>
+        <a class="red-text" @click="deleteOrder(order._id)" v-else>Delete</a>
       </div>
     </div>
   </div>
@@ -84,6 +85,7 @@ export default {
       ],
       selectedSize: "",
       selectedQuantity: "",
+      updated: false,
     };
   },
   methods: {
@@ -96,12 +98,22 @@ export default {
         .delete("http://localhost:3000/orders/".concat(orderId))
         .then((response) => {
           console.log(response);
-          location.reload();
+          this.$router.push({ path: "/cart" });
         });
     },
     updateOrder: function () {
-      this.order.shoeSize = this.selectedSize;
-      this.order.quantity = this.selectedQuantity;
+      this.updated = false
+      this.$http
+        .patch("http://localhost:3000/orders/".concat(this.order._id), {
+          shoeSize: this.selectedSize,
+          quantity: this.selectedQuantity,
+        })
+        .then((response) => {
+          console.log(response);
+        });
+    },
+    selectChanged: function () {
+      this.updated = true
     },
   },
 };
