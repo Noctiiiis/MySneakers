@@ -4,22 +4,9 @@ const mongoose = require('mongoose');
 
 const Order = require('../models/Order')
 
-// Gets the path /orders from app.js which gets all the orders
-router.get('/', (req, res, next) => {
-    Order.find()
-        .populate('product')
-        .exec()
-        .then(orders => {
-            res.status(200).json(orders);
-        })
-        .catch(error => {
-            res.status(500).json(error);
-        });
-});
-
 // Gets the order corresponding to the id given in the url
-router.get('/:orderId', (req, res, next) => {
-    Order.findById(req.params.orderId)
+router.get('/:userEmail', (req, res, next) => {
+    Order.find({ userEmail: req.params.userEmail})
         .populate('product')
         .exec()
         .then(order => {
@@ -34,6 +21,7 @@ router.get('/:orderId', (req, res, next) => {
 router.post('/', (req, res, next) => {
     const order = new Order({
         _id: mongoose.Types.ObjectId(),
+        userEmail: req.body.userEmail,
         product: req.body.productId,
         shoeSize: req.body.shoeSize,
         quantity: req.body.quantity,
