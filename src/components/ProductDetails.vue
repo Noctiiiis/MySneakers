@@ -140,7 +140,7 @@ export default {
           })
           .then((response) => {
             console.log(response);
-            window.location.href = "/cart";
+            this.$router.push({ path: "/cart" });
           });
       } else {
         this.showError = true;
