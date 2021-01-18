@@ -16,8 +16,8 @@
           <p class="grey-text">{{ product.brand }} for {{ product.type }}</p>
         </div>
         <mdb-alert color="danger" v-if="showError">
-            You must choose a shoe size and a quantity
-          </mdb-alert>
+          You must choose a shoe size and a quantity
+        </mdb-alert>
         <div class="w-100 p-4 z-depth-1 d-inline-block">
           <div class="w-100 text-left">
             <span class="grey-text">Shoe sizes</span>
@@ -131,19 +131,24 @@ export default {
       this.selectedSize = shoeSize;
     },
     addToCart: function () {
-      if (this.selectedSize != "" && this.selectedQuantity != '') {
-        this.$http
-          .post("http://localhost:3000/orders", {
-            productId: this.product._id,
-            shoeSize: this.selectedSize,
-            quantity: this.selectedQuantity,
-          })
-          .then((response) => {
-            console.log(response);
-            this.$router.push({ path: "/cart" });
-          });
+      if (this.$store.getters.token == "") {
+        this.$router.push({path: '/login'})
       } else {
-        this.showError = true;
+        if (this.selectedSize != "" && this.selectedQuantity != "") {
+          this.$http
+            .post("http://localhost:3000/orders", {
+              userEmail: this.$store.getters.userEmail,
+              productId: this.product._id,
+              shoeSize: this.selectedSize,
+              quantity: this.selectedQuantity,
+            })
+            .then((response) => {
+              console.log(response);
+              this.$router.push({ path: "/cart" });
+            });
+        } else {
+          this.showError = true;
+        }
       }
     },
   },
