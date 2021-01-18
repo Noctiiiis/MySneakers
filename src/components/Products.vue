@@ -31,6 +31,9 @@ export default {
   mounted() {
     this.dataFilter();
   },
+  updated() {
+    this.dataFilter();
+  },
   data() {
     return {
       products: [],
