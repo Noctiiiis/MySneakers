@@ -4,6 +4,7 @@ import 'mdbvue/lib/css/mdb.min.css'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
+import Vuex from 'vuex'
 
 // Components
 import App from './App'
@@ -18,6 +19,7 @@ import NotFound from './components/NotFound'
 Vue.config.productionTip = false
 Vue.use(VueRouter)
 Vue.use(VueResource)
+Vue.use(Vuex)
 
 const router = new VueRouter({
   mode: 'history',
@@ -35,7 +37,31 @@ const router = new VueRouter({
   ]
 })
 
+const store = new Vuex.Store({
+  state: {
+    token: '',
+    userEmail: ''
+  },
+  mutations: {
+    addToken(state, token) {
+      state.token = token
+    },
+    addUserEmail(state, userEmail) {
+      state.userEmail = userEmail
+    }
+  },
+  getters: {
+    token: state => {
+      return state.token
+    },
+    userEmail: state => {
+      return state.userEmail
+    }
+  }
+})
+
 new Vue({
   router,
+  store,
   render: h => h(App),
 }).$mount('#app')
