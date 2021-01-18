@@ -13,7 +13,9 @@
         {{ product.type }}
       </mdb-card-text>
       <mdb-card-text>CHF {{ product.price }}.-</mdb-card-text>
-      <mdb-btn color="grey darken-1">Add to cart</mdb-btn>
+      <router-link :to="`/products/${product._id}`">
+        <mdb-btn color="grey darken-1">Add to cart</mdb-btn>
+      </router-link>
     </mdb-card-body>
   </mdb-card>
 </template>
