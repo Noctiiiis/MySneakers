@@ -55,8 +55,9 @@ export default {
           })
           .then(
             (response) => {
-              console.log(response);
-              window.location.href = "/";
+              this.$store.commit('addToken', response.data.token)
+              this.$store.commit('addUserEmail', this.email)
+              this.$router.push({path: '/'})
             },
             (response) => {
               if (response.status == "401") {
