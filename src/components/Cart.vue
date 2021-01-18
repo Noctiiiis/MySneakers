@@ -1,6 +1,11 @@
 <template>
   <mdb-container>
     <mdb-row>
+      <mdb-col class="mb-5">
+        <h4 class="font-weight-bold">{{ this.$store.getters.userEmail }}</h4>
+      </mdb-col>
+    </mdb-row>
+    <mdb-row>
       <mdb-col class="col-lg-8 col-12 mb-5 text-left">
         <h4>Cart</h4>
         <div v-for="order in orders" :key="order.id" class="mb-3">
@@ -43,9 +48,17 @@ export default {
     };
   },
   mounted() {
-    this.getOrders();
+    this.checkAuth();
   },
   methods: {
+    checkAuth: function () {
+      if (this.$store.getters.token == '') {
+        this.$router.push({ path: "/login" });
+      }
+      else {
+        this.getOrders();
+      }
+    },
     getOrders: function () {
       this.$http.get("http://localhost:3000/orders").then(
         (response) => {
