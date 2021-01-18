@@ -30,6 +30,7 @@ const router = new VueRouter({
     { path: '/products/women', component: Products, props: { filter: 'women' } },
     { path: '/products/:id', component: ProductDetails, props: true },
     { path: '/login', component: Login },
+    { path: '/logout', component: Home, props: { logout: true} },
     { path: '/register', component: Register },
     { path: '/cart', component: Cart },
     { path: '/error', component: NotFound },
