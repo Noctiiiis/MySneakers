@@ -76,7 +76,7 @@ export default {
           },
           (response) => {
             console.log(response);
-            window.location.href = "/error";
+            this.$router.push({ path: "/error" });
           }
         );
     },
