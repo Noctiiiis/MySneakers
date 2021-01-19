@@ -83,7 +83,7 @@ export default {
     makeTotal: function () {
       let total = 0;
       this.orders.forEach((order) => {
-        total += parseFloat(order.product.price);
+        total += parseFloat(order.product.price) * order.quantity;
       });
       this.total = total.toFixed(2);
     },
