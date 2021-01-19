@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const checkAuth = require('../auth/check-auth');
 
 const Order = require('../models/Order')
 
 // Gets the order corresponding to the id given in the url
-router.get('/:userEmail', (req, res, next) => {
+router.get('/:userEmail', checkAuth, (req, res, next) => {
     Order.find({ userEmail: req.params.userEmail})
         .populate('product')
         .exec()
@@ -18,7 +19,7 @@ router.get('/:userEmail', (req, res, next) => {
 });
 
 // Creates a new order
-router.post('/', (req, res, next) => {
+router.post('/', checkAuth, (req, res, next) => {
     const order = new Order({
         _id: mongoose.Types.ObjectId(),
         userEmail: req.body.userEmail,
@@ -36,7 +37,7 @@ router.post('/', (req, res, next) => {
 });
 
 // Updates the order corresponding to the id given in the url
-router.patch('/:orderId', (req, res, next) => {
+router.patch('/:orderId', checkAuth, (req, res, next) => {
     const id = req.params.orderId;
     Order.updateOne({ _id: id }, { $set: { shoeSize: req.body.shoeSize, quantity: req.body.quantity } })
         .exec()
@@ -49,7 +50,7 @@ router.patch('/:orderId', (req, res, next) => {
 });
 
 // Deletes the order corresponding to the id given in the url
-router.delete('/:orderId', (req, res, next) => {
+router.delete('/:orderId', checkAuth, (req, res, next) => {
     Order.remove({ _id: req.params.orderId })
         .exec()
         .then(result => {
