@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../models/User')
 
+// Gets the path /user/register from app.js which regiters a new user
 router.post('/register', (req, res, next) => {
     User.find({ email: req.body.email })
         .exec()
@@ -49,6 +50,7 @@ router.post('/register', (req, res, next) => {
         });
 });
 
+// Gets the path /user/login from app.js which authenticates a user
 router.post('/login', (req, res, next) => {
     User.findOne({ email: req.body.email })
         .exec()
